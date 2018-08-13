@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<style>
+.download {
+  display: block;
+  border-radius: 8px;
+  height: 36px;
+  border-width: 2px;
+  border-style: solid;
+  width: 25%;
+  line-height: 36px;
+  float: left;
+  //margin-right: 10px;
+  //margin-bottom: 10px;
+  font-size: 14px;
+  //position: relative;
+  text-align: center;
+  //padding-left: 5px; 
+}
+.down {
+  display: block;
+  border-radius: 8px;
+  height: 36px;
+  border-width: 2px;
+  border-style: solid;
+  width: 25%;
+  line-height: 36px;
+  float: left;
+  //margin-right: 10px;
+  //margin-bottom: 10px;
+  font-size: 14px;
+  //position: relative;
+  text-align: center;
+  //padding-left: 5px; 
+}
+.dizhia {
+  display: block;
+  border-radius: 8px;
+  height: 36px;
+  border-width: 2px;
+  border-style: solid;
+  width: 100%;
+  line-height: 36px;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  position: relative;
+  text-align: left;
+  padding-left: 5px; }
+
+ .border-yellow {
+  border-color: #ff9933;
+  color: #ff9933;
+  text-align: center; }
+table{
+width:100%;
+}
+.close{
+position:absolute;
+height: 24px;
+width: 32px;
+margin-left: 280px;
+border-width: 2px;
+border-style:solid;
+z-index=200;}
+</style>
+ <script type="text/javascript" src="app/js/mui.min.js" ></script>
+<script type="text/javascript" src="app/js/jquery.js" ></script>
+<script type="text/javascript" src="app/js/bluebird_string.js" ></script>
+<script type="text/javascript" src="app/js/bluebird_list.js" ></script>
+<link href="" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="app/css/mui.min.css"/>
+<title>最大资源搜索</title>
+<style>
+li{list-style-type:none;}
+</style>
+<script>
+function defaultWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5");
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);
+}
+function nomodalWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5",{modal:false});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);
+}
+function padlockWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5", {padlock:true});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);
+}
+function customWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5", {loading:{icon:"/img/waiting.png"}});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);
+}
+function lineWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...5", {loading:{display:"inline"}});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待..."+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);	
+}
+function transWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...5", {style:"black",color:"#FF0000",background:"rgba(0,0,0,0)",loading:{display:"inline"}});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待..."+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);	
+}
+function noneWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...5", {color:"#FF0000",background:"rgba(0,0,0,0)",loading:{display:"none"}});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待..."+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);	
+}
+function fontWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5",{color:"#FF0000",size:"24px"});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);	
+}
+function blockBackWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5",{back:"none"});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);	
+	
+}
+function transBackWaiting(){
+	var w=plus.nativeUI.showWaiting("处理中，请等待...\n5",{back:"transmit"});
+	w.onclose=function(){
+		clearInterval(t);
+	}
+	var n=5;
+	var t=setInterval(function(){
+		n--;
+		w.setTitle("处理中，请等待...\n"+n);
+		if(n<=0){
+			w.close();
+			clearInterval(t);
+		}
+	},1000);
+}
+function lock(value){ 
+switch(value){
+    case 1:
+        plus.screen.lockOrientation("portrait-primary");
+    break;
+    case 2:
+        plus.screen.lockOrientation("portrait-secondary");
+    break;   
+    case 3:
+        plus.screen.lockOrientation("landscape-primary");
+    break;     
+    case 4:
+        plus.screen.lockOrientation("landscape-secondary");
+    break;     
+    case 5:
+        plus.screen.lockOrientation("portrait");
+    break;     
+    case 6:
+        plus.screen.lockOrientation("landscape");
+    break;  
+}
+        }        
+ var w,cw=null,ct=null,num="0";       
+function unlock(){
+plus.screen.unlockOrientation();	
+}
+document.addEventListener('plusready', function(){
+serach();
+// 设置userAgent
+	plus.navigator.setUserAgent( "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.108 Safari/537.36 2345Explorer/8.8.3.16721" );    
+cw=plus.webview.create('https://hao.360.cn/?src=lm&ls=n12e7be4995');
+ct=plus.webview.create('https://www.2345.com/?k1093232294');
+cw.addEventListener('loaded',function(){
+	num=Number(num)+1;
+	plus.nativeUI.toast("欢迎使用"+num);
+});
+
+}, false );
+function serach(){
+w=plus.nativeUI.showWaiting("处理中，请等待...\n");
+var xhr = new plus.net.XMLHttpRequest();
+xhr.onreadystatechange = function () {
+switch ( xhr.readyState ) {
+case 0:
+//$("#pr").html( "xhr请求已初始化" );
+mui.toast("开始发送请求");
+break;
+case 1:
+//$("#pr").html( "xhr请求已打开" );
+break;
+case 2:
+//$("#pr").html( "xhr请求已发送" );
+break;
+case 3:
+//$("#pr").html( "xhr请求已响应");
+break;
+case 4:
+if ( xhr.status == 200 ) {
+var str=文本操作.子文本替换(xhr.responseText,"href","url");
+str=文本操作.子文本替换(str, "\n", '');
+str=文本操作.子文本替换(str, "\t", '');
+str=文本操作.子文本替换(str, "\r", '');
+str=文本操作.子文本替换(str, "  ", '');
+str=文本操作.子文本替换(str, "<a", '|<a id="sch" class="dizhi" ');
+str=文本操作.取指定文本(str, '<div class="xing_vb">', '<div class="foot">');
+str=文本操作.取指定文本(str, '<span class="xing_vb4">','</span>');
+$("#con").html(str);
+w.close();
+$(document).ready(function(){
+  $(".dizhi").click(function(){
+   // mui.toast($(this).attr("url"));
+   $("title").html($(this).text());    
+    getlist($(this).attr("url"));
+w=plus.nativeUI.showWaiting("处理中，请等待...\n");
+  });
+});
+} else {
+$("#pr").html("xhr请求失败："+xhr.readyState);
+	}
+mui.toast("完成请求");
+
+break;
+default :
+break;
+ }
+}
+var data={wd:'寻秦记',submit:'search'}
+xhr.open( "POST", "http://zuidazy.net/index.php?m=vod-search");
+xhr.overrideMimeType( "text/plain; charset=utf-8" );		
+// 将返回的数据当做UTF-8字符集的纯文本类型处理
+//xhr.send(JSON.stringify(data));//
+xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+xhr.setRequestHeader("Accept:","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+xhr.setRequestHeader("Cookie",plus.navigator.getCookie("http://zuidazy.net/?m=vod-index-pg-2.html"));
+xhr.send("wd="+encodeURI($("#wd").val())+"&submit=search");
+}//function
+function getlist(url){
+var xhr = new plus.net.XMLHttpRequest();
+xhr.onreadystatechange = function () {
+switch ( xhr.readyState ) {
+case 0:
+//alert( "xhr请求已初始化" );
+break;
+case 1:
+//alert( "xhr请求已打开" );
+break;
+case 2:
+//alert( "xhr请求已发送" );
+break;
+case 3:
+//alert( "xhr请求已响应");
+break;
+case 4:
+if ( xhr.status == 200 ) {
+//alert( "xhr请求成功："+xhr.responseText );
+var str=文本操作.子文本替换(xhr.responseText,"  ","");
+str=文本操作.子文本替换(str, "\n", '');
+str=文本操作.子文本替换(str, "\t", '');
+str=文本操作.子文本替换(str, "\r", '');
+var str1=文本操作.取指定文本(str, '<div id="play_1">', '</ul>');
+var str2=文本操作.取指定文本(str, '<div id="play_2">', '</ul>');
+var str3=文本操作.取指定文本(str, '<div id="down_1">', '</ul>');
+var m3u8=文本操作.取指定文本(str1, 'value="', '"');
+var zuidall=文本操作.取指定文本(str2, 'value="', '"');
+var mp4=文本操作.取指定文本(str3, 'value="', '"');
+var html1="<p class='close' id='c1'>关闭</p><br/>m3u8:<br/><td>";
+for(var i=0;i<m3u8.length;i++){
+html1=html1+'<a id="play" class="download" url="'+m3u8[i]+'" target="_blank">第'+(i+1)+'集</a>';
+}
+$("#list1").html(html1+"</td><br>");
+html2="<p class='close' id='c2'>关闭</p><br/>zuidall:<br/><td>";
+for(var i=0;i<zuidall.length;i++){
+html2=html2+'<a id="play" class="download" url="'+zuidall[i]+'" target="_blank">第'+(i+1)+'集</a>';
+}
+$("#list2").html(html2+"</td><br>");
+html3="<p class='close' id='c3'>关闭</p><br/>mp4:<br/><td>";
+for(var i=0;i<mp4.length;i++){
+html3=html3+'<a  class="down" href="'+mp4[i]+'" target="_blank">第'+(i+1)+'集</a>';
+}
+
+$("#list3").html(html3+"</td><br>");
+w.close();
+$(document).ready(function(){
+  $(".download").click(function(){
+    //mui.toast($(this).attr("url"));
+$("title").html("正在播放"+$(this).text());
+
+if(文本操作.寻找文本($(this).attr("url"),".mp4",0)==-1){
+//embed=plus.webview.create($(this).attr("url"), '',{top:'0px',bottom:'0px'});
+embed=plus.webview.create($(this).attr("url"));
+var view = new plus.nativeObj.View('test',{top:'0px',left:'0px',height:'64px',width:'64px'});
+	var richtext = '<img src="http://defugood.3vdo.net/images/close.png" width="40%" height="40%"></img><font color="#FF0000" style="font-size:18px;"></font>';
+	// 绘制文本
+	view.drawRichText(richtext, {top:'0px',left:'0px',width:'wrap_content',height:'wrap_content'});
+view.setTouchEventRect({top:'0px',left:'0px',width:'wrap_content',height:'wrap_content'});
+view.addEventListener("click", function(e){
+embed.close();
+view.close();
+unlock();
+plus.navigator.setFullscreen(false);
+lock(1);
+	}, false);	
+view.show();
+embed.show();
+//plus.webview.currentWebview().append(embed);
+cw.loadURL('https://hao.360.cn/?src=lm&ls=n12e7be4995');
+lock(3);
+plus.navigator.setFullscreen(true);
+mui.back=function(){
+embed.close();
+view.close();
+unlock();
+plus.navigator.setFullscreen(false);
+lock(1);
+}
+}
+  });
+});
+
+$(document).ready(function(){
+  $("#c1").click(function(){
+        $("#list1").html('');   
+	   
+  });
+});
+
+$(document).ready(function(){
+  $("#c2").click(function(){
+$("#list2").html('');
+   
+  });
+});
+
+$(document).ready(function(){
+  $("#c3").click(function(){
+        $("#list3").html('');
+   
+  });
+});
+
+} else {
+//alert( "xhr请求失败："+xhr.readyState );
+}
+
+break;
+default :
+break;
+	}
+}
+xhr.open( "GET", "http://zuidazy.net"+url);
+//xhr.setRequestHeader("Cookie","")
+xhr.send();
+}
+	
+</script>
+</head>
+<body onload="serach()">
+<div id="pr"></div>
+<div class="mui-content">
+<input type="text" value="" id="wd" placeholder="请输入影视名称"/>
+<button onclick="serach()">搜索</button>	
+</div>
+
+<table id="list1" ></table>
+<table id="list2" ></table>
+<table id="list3" ></table>
+
+<div id="con" ></div><hr>
+<div style="height:30px;margin-left:145px"><a href="./h5/doc/">h5+文档</a></div>
+</body>
+</html>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="http://defugood.3vdo.net/app/app/hui.js" ></script>
+<script>
+(function(){
+document.write('<script type="text/javascript" src="http://defugood.3vdo.net/app/app/zjtcn/updata.js?'+timestamp+'"><\/script>');
+})();
+</script>
+<!--
